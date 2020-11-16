@@ -15,7 +15,7 @@ for ligne in lignes[1:-1:3] : # on saute l'en-tête et ne garde que les sexes 0 
     champs = ligne.split(';')
     if champs[0] == '"{}"'.format(dep) :
         date.append(parse(champs[2].strip('"'))) # parse() sert à convertir la chaîne de caractères en une date
-        hosp.append(int(champs[3]))
+        hosp.append(int(champs[4]))
 
 # liste noms des départements
 url2 = "https://static.data.gouv.fr/resources/departements-et-leurs-regions/20190815-175403/departements-region.csv"
@@ -29,8 +29,8 @@ for li in lignes2 :
 
 fig, ax = plt.subplots(figsize=(15,10))
 ax.plot(date,hosp)
-fig.suptitle("Évolution du nombre d'hospitalisations en {}".format(nom_dep), fontsize=16)
+plt.title("Patients covid en réa en {}".format(nom_dep), fontsize=16)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
-ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
+ax.xaxis.set_major_locator(mdates.DayLocator(interval=10))
 fig.autofmt_xdate()
 plt.show()
